@@ -108,8 +108,7 @@ while True:
 
         try:
             file = open(FILE_NAME, "w")
-            json.dump(students, file)
-
+            json.dump(students, file, indent=4)
             file.close()
             print("The following data was saved to file!")
             for student in students:
