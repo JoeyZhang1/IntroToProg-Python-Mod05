@@ -62,12 +62,18 @@ while True:
 
         try:
             student_first_name = input("Enter the student's first name: ")
+            if not student_first_name:
+                raise ValueError("Please enter a first name: ")
             if not student_first_name.isalpha():
                 raise ValueError("The last name should not contain numbers.")
             student_last_name = input("Enter the student's last name: ")
+            if not student_last_name:
+                raise ValueError("Please enter a last name.")
             if not student_last_name.isalpha():
                 raise ValueError("The last name should not contain numbers.")
             course_name = input("Please enter the name of the course: ")
+            if not course_name:
+                raise ValueError("Please enter course name.")
             student_data = {"FirstName": student_first_name,
                             "LastName": student_last_name,
                             "CourseName": course_name}
@@ -88,11 +94,13 @@ while True:
     elif menu_choice == "2":
 
         # Process the data to create and display a custom message
-        print("-" * 50)
-        for student in students:
-            print(f'Student {student["FirstName"]} '
-                  f'{student["LastName"]} is enrolled in {student["CourseName"]}')
-        print("-" * 50)
+        if not students:
+            print("No students registered.")
+        else:
+            print("-" * 50)
+            for student in students:
+                print(f"Student {student['FirstName']} {student['LastName']} is enrolled in {student['CourseName']}")
+            print("-" * 50)
         continue
 
     # Save the data to a file
@@ -105,8 +113,7 @@ while True:
             file.close()
             print("The following data was saved to file!")
             for student in students:
-                print(f'Student {student["FirstName"]} '
-                      f'{student["LastName"]} is enrolled in {student["CourseName"]}')
+                print(f"Student {student['FirstName']} {student['LastName']} is enrolled in {student['CourseName']}")
         except Exception as e:
             if not file.closed:
                 file.close()
